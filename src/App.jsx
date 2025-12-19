@@ -1,17 +1,17 @@
 import Result from "./components/Result"
 import UserInput from "./components/UserInput"
 import { useState } from "react"
-
-
-
+``
 function App() {
 
   const[defInput,setInput]=useState({
-        initialinvestment:10000,
-        annualinvestment:100000,
-        expectedduration:3,
+        initialInvestment:10000,
+        annualInvestment:100000,
+        expectedReturn:3,
         duration:2
     })
+
+  const valid=defInput.duration>=1;
 
   function handleInput(settingInput,value){
       setInput((olderInput)=>{
@@ -23,8 +23,9 @@ function App() {
   };
   return (
     <>
-      <UserInput defInput={defInput} onChange={handleInput}/>
-      <Result defInput={defInput}/>
+      <UserInput defInputs={defInput} onChange={handleInput}/>
+      {!valid && <p class="center">Please Enter a Value above 0</p>}
+      {valid && <Result defInputs={defInput}/>}
     </>
   )
 }
